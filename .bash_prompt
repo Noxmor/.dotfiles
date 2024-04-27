@@ -7,23 +7,23 @@ esac
 
 # Color codes
 if [ "$color_prompt" = "yes" ]; then
-    COLOR_RESET="\033[0m"
-    COLOR_FG="\033[38;5;"
-    COLOR_BG="\033[48;5;"
+    COLOR_RESET="\[\033[0m\]"
+    COLOR_FG="\[\033[38;5;"
+    COLOR_BG="\[\033[48;5;"
 
     # Color code for the current user's name.
-    COLOR_USERNAME_FG="255m"
-    COLOR_USERNAME_BG="2m"
+    COLOR_USERNAME_FG="255m\]"
+    COLOR_USERNAME_BG="2m\]"
     COLOR_USERNAME="${COLOR_FG}${COLOR_USERNAME_FG}${COLOR_BG}${COLOR_USERNAME_BG}"
 
     # Color code for the current working directory.
-    COLOR_DIR_FG="255m"
-    COLOR_DIR_BG="4m"
+    COLOR_DIR_FG="255m\]"
+    COLOR_DIR_BG="4m\]"
     COLOR_DIR="${COLOR_FG}${COLOR_DIR_FG}${COLOR_BG}${COLOR_DIR_BG}"
 
     # Color code for the git branch.
-    COLOR_BRANCH_FG="255m"
-    COLOR_BRANCH_BG="9m"
+    COLOR_BRANCH_FG="255m\]"
+    COLOR_BRANCH_BG="9m\]"
     COLOR_BRANCH="${COLOR_FG}${COLOR_BRANCH_FG}${COLOR_BG}${COLOR_BRANCH_BG}"
 else
     COLOR_RESET=""
@@ -46,6 +46,16 @@ fi
 # The symbol that is displayed at the end of the prompt.
 PROMPT_END_SYMBOL='$'
 
+# Attempts to parse a prefix, if inside a git repository.
+# This is very ugly, because directly putting the color codes
+# inside echo statement would cause errors.
+parse_git_prefix()
+{
+    local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f3 -)"
+
+    [ -n "${branch}" ] && echo "git:("
+}
+
 # Attempts to parse the current git branch, if inside a git repository.
 parse_git_branch()
 {
@@ -56,12 +66,22 @@ parse_git_branch()
         branch="${branch_trunc}..."
     fi
 
-    [ -n "${branch}" ] && echo -e "${COLOR_FG}${COLOR_DIR_BG}git:(${COLOR_FG}${COLOR_BRANCH_BG}${branch}${COLOR_FG}${COLOR_DIR_BG}) "
+    [ -n "${branch}" ] && echo -e "${branch}"
+}
+
+# Attempts to parse a postfix, if inside a git repository.
+# This is very ugly, because directly putting the color codes
+# inside the echo statement would cause errors.
+parse_git_postfix()
+{
+    local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f3 -)"
+
+    [ -n "${branch}" ] && echo ") "
 }
 
 # Sets the prompt.
 if [ "$color_prompt" = "yes" ]; then
-    PS1="${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_USERNAME} \u ${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_BG}${COLOR_DIR_BG}${COLOR_DIR} \w ${COLOR_RESET}${COLOR_FG}${COLOR_DIR_BG} ${COLOR_RESET}\$(parse_git_branch)${COLOR_RESET}${PROMPT_END_SYMBOL} "
+    PS1="${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_USERNAME} \u ${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_BG}${COLOR_DIR_BG}${COLOR_DIR} \w ${COLOR_RESET}${COLOR_FG}${COLOR_DIR_BG} \$(parse_git_prefix)${COLOR_FG}${COLOR_BRANCH_BG}\$(parse_git_branch)${COLOR_FG}${COLOR_DIR_BG}\$(parse_git_postfix)${COLOR_RESET}${PROMPT_END_SYMBOL} "
 else
     PS1="\u \w \$(parse_git_branch)${PROMPT_END_SYMBOL} "
 fi
