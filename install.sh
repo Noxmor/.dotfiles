@@ -15,7 +15,6 @@ function ask()
     [ "$response_lc" = "y" ]
 }
 
-# TODO: Add mkdir -p commands in case the user has not created the necessary directories yet
 DOTFILES=(
 	".bashrc"
 	".bash_prompt"
@@ -29,6 +28,9 @@ DOTFILES=(
 function install_auto()
 {
     for file in ${DOTFILES[@]}; do
+        dir_path="$(dirname $HOME/$file)"
+        mkdir -p "$dir_path"
+
         ln -sf "$DIRNAME/$file" "$HOME/$file"
         echo "Successfully installed $file"
     done
@@ -38,6 +40,9 @@ function install_manual()
 {
     for file in ${DOTFILES[@]}; do
         if ask "Do you want to install $file?"; then
+            dir_path="$(dirname $HOME/$file)"
+            mkdir -p "$dir_path"
+
             ln -sf "$DIRNAME/$file" "$HOME/$file"
             echo "Successfully installed $file"
         else
