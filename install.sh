@@ -15,7 +15,16 @@ function ask()
     [ "$response_lc" = "y" ]
 }
 
-DOTFILES=(".bashrc" ".bash_prompt" ".bash_aliases" ".tmux.conf")
+# TODO: Add mkdir -p commands in case the user has not created the necessary directories yet
+DOTFILES=(
+	".bashrc"
+	".bash_prompt"
+	".bash_aliases"
+	".tmux.conf"
+	".config/nvim/init.lua"
+	".config/nvim/lua/noxmor/init.lua"
+	".config/nvim/lua/noxmor/lazy.lua"
+)
 
 function install_auto()
 {
