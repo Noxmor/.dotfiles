@@ -21,8 +21,7 @@ DOTFILES=(
 	".bash_aliases"
 	".tmux.conf"
 	".config/nvim/init.lua"
-	".config/nvim/lua/noxmor/init.lua"
-	".config/nvim/lua/noxmor/lazy.lua"
+	".config/nvim/lua/noxmor"
 )
 
 function install_auto()
