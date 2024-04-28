@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Copyright (c) 2024 Noxmor
+
 function ask()
 {
     read -p "$1 (Y/n): " response
