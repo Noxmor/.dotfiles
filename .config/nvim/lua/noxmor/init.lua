@@ -1,7 +1,5 @@
 -- Copyright (c) 2024 Noxmor
 
---require("noxmor.set")
---require("noxmor.remap")
 require("noxmor.lazy")
 
 -- Highlight trailing whitespaces in red.
@@ -25,18 +23,22 @@ vim.api.nvim_set_keymap('n', '<C-j>', ':TmuxNavigateDown<CR>', { noremap = true 
 vim.api.nvim_set_keymap('n', '<C-k>', ':TmuxNavigateUp<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':TmuxNavigateRight<CR>', { noremap = true })
 
-
+-- Recognize .bash_prompt as a sh file.
 vim.cmd("autocmd BufRead,BufNewFile .bash_prompt set filetype=sh")
 
+-- Set the color scheme.
 vim.opt.background = 'dark'
 vim.cmd("colorscheme gruvbox")
 
+-- Configure tabs.
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+-- Configure color column.
 vim.opt.colorcolumn = '80'
 vim.cmd("highlight ColorColumn ctermbg=LightBlue guibg=LightBlue")
 
+-- Enable line numbers and relative line numbers.
 vim.opt.number = true
 vim.opt.relativenumber = true
