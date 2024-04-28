@@ -25,6 +25,11 @@ if [ "$color_prompt" = "yes" ]; then
     COLOR_BRANCH_FG="255m\]"
     COLOR_BRANCH_BG="9m\]"
     COLOR_BRANCH="${COLOR_FG}${COLOR_BRANCH_FG}${COLOR_BG}${COLOR_BRANCH_BG}"
+
+    # Color code for the prompt end symbol.
+    COLOR_PROMPT_SYMBOL_FG="15m\]"
+    COLOR_PROMPT_SYMBOL_BG=""
+    COLOR_PROMPT_SYMBOL="${COLOR_FG}${COLOR_PROMPT_SYMBOL_FG}"
 else
     COLOR_RESET=""
     COLOR_FG=""
@@ -41,6 +46,10 @@ else
     COLOR_BRANCH_FG=""
     COLOR_BRANCH_BG=""
     COLOR_BRANCH=""
+
+    COLOR_PROMPT_SYMBOL_FG=""
+    COLOR_PROMPT_SYMBOL_BG=""
+    COLOR_PROMPT_SYMBOL=""
 fi
 
 # The symbol that is displayed at the end of the prompt.
@@ -81,7 +90,7 @@ parse_git_postfix()
 
 # Sets the prompt.
 if [ "$color_prompt" = "yes" ]; then
-    PS1="${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_USERNAME} \u ${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_BG}${COLOR_DIR_BG}${COLOR_DIR} \w ${COLOR_RESET}${COLOR_FG}${COLOR_DIR_BG} \$(parse_git_prefix)${COLOR_FG}${COLOR_BRANCH_BG}\$(parse_git_branch)${COLOR_FG}${COLOR_DIR_BG}\$(parse_git_postfix)${COLOR_RESET}${PROMPT_END_SYMBOL} "
+    PS1="${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_USERNAME} \u ${COLOR_FG}${COLOR_USERNAME_BG}${COLOR_BG}${COLOR_DIR_BG}${COLOR_DIR} \w ${COLOR_RESET}${COLOR_FG}${COLOR_DIR_BG} \$(parse_git_prefix)${COLOR_FG}${COLOR_BRANCH_BG}\$(parse_git_branch)${COLOR_FG}${COLOR_DIR_BG}\$(parse_git_postfix)${COLOR_PROMPT_SYMBOL}${PROMPT_END_SYMBOL}${COLOR_RESET} "
 else
     PS1="\u \w \$(parse_git_branch)${PROMPT_END_SYMBOL} "
 fi
