@@ -13,7 +13,7 @@ function ask()
     [ "$response_lc" = "y" ]
 }
 
-DOTFILES=(".bashrc" ".bash_prompt" ".bash_aliases")
+DOTFILES=(".bashrc" ".bash_prompt" ".bash_aliases" ".tmux.conf")
 
 function install_auto()
 {
