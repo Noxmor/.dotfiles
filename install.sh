@@ -32,6 +32,10 @@ function install_auto()
         dir_path="$(dirname $HOME/$file)"
         mkdir -p "$dir_path"
 
+        if [ -L "$HOME/$file" ]; then
+            rm "$HOME/$file"
+        fi
+
         ln -sf "$DIRNAME/$file" "$HOME/$file"
         echo "Successfully installed $file"
     done
@@ -43,6 +47,10 @@ function install_manual()
         if ask "Do you want to install $file?"; then
             dir_path="$(dirname $HOME/$file)"
             mkdir -p "$dir_path"
+
+            if [ -L "$HOME/$file" ]; then
+                rm "$HOME/$file"
+            fi
 
             ln -sf "$DIRNAME/$file" "$HOME/$file"
             echo "Successfully installed $file"
@@ -60,7 +68,7 @@ function main()
         echo "The following files will be installed:"
 
         for file in ${DOTFILES[@]}; do
-            if [ -f "$HOME/$file" ]; then
+            if [ -e "$HOME/$file" ]; then
                 echo "$file (will be overwritten)"
             else
                 echo "$file"
