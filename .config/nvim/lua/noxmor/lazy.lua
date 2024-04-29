@@ -16,18 +16,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- TODO: Add plugin files for these.
---    "nvim-lua/plenary.nvim",
---    "tpope/vim-fugitive",
---    {
---        "j-hui/fidget.nvim",
---        config = function()
---            require('fidget').setup({})
---        end
---    },
---    "ThePrimeagen/vim-be-good",
---    "christoomey/vim-tmux-navigator"
-
 require("lazy").setup({ { import = "noxmor.plugins" }, { import = "noxmor.plugins.lsp" } }, {
     checker = {
         enabled = true
