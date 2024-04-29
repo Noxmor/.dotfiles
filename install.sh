@@ -2,6 +2,17 @@
 
 # Copyright (c) 2024 Noxmor
 
+DIRNAME="$(realpath $(dirname "$0"))"
+
+DOTFILES=(
+	".bashrc"
+	".bash_prompt"
+	".bash_aliases"
+	".tmux.conf"
+	".config/nvim/init.lua"
+	".config/nvim/lua/noxmor"
+)
+
 function ask()
 {
     read -p "$1 (Y/n): " response
@@ -14,15 +25,6 @@ function ask()
 
     [ "$response_lc" = "y" ]
 }
-
-DOTFILES=(
-	".bashrc"
-	".bash_prompt"
-	".bash_aliases"
-	".tmux.conf"
-	".config/nvim/init.lua"
-	".config/nvim/lua/noxmor"
-)
 
 function install_auto()
 {
@@ -50,26 +52,29 @@ function install_manual()
     done
 }
 
-echo -e "----------Noxmor's dotfiles install----------\n"
+function main()
+{
+    echo -e "----------Noxmor's dotfiles install----------\n"
 
-DIRNAME="$(realpath $(dirname "$0"))"
+    if ask "Do you want to install all dotfiles automatically?"; then
+        echo "The following files will be installed:"
 
-if ask "Do you want to install all dotfiles automatically?"; then
-    echo "The following files will be installed:"
+        for file in ${DOTFILES[@]}; do
+            if [ -f "$HOME/$file" ]; then
+                echo "$file (will be overwritten)"
+            else
+                echo "$file"
+            fi
+        done
 
-    for file in ${DOTFILES[@]}; do
-        if [ -f "$HOME/$file" ]; then
-            echo "$file (will be overwritten)"
+        if ask "Continue?"; then
+            install_auto
         else
-            echo "$file"
+            echo "Aborting dotfiles installation..."
         fi
-    done
-
-    if ask "Continue?"; then
-        install_auto
     else
-        echo "Aborting dotfiles installation..."
+        install_manual
     fi
-else
-    install_manual
-fi
+}
+
+main
