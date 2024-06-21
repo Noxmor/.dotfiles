@@ -14,7 +14,8 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "clangd",
-                "lua_ls"
+                "lua_ls",
+                "texlab"
             }
         })
     end
