@@ -13,6 +13,10 @@ DOTFILES=(
 	".config/nvim/lua/noxmor"
 )
 
+COMPLEX_DOTFILES=(
+    "install_hyprland_config"
+)
+
 function ask()
 {
     read -p "$1 (Y/n): " response
@@ -60,6 +64,26 @@ function install_manual()
     done
 }
 
+function install_complex_dotfiles()
+{
+    for func in ${COMPLEX_DOTFILES[@]}; do
+        $func
+    done
+}
+
+function install_hyprland_config()
+{
+    if ask "Do you want to install hyprland config?"; then
+        mkdir -p "$HOME/.config/hypr"
+        ln -sf "$DIRNAME/.config/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
+        ln -sf "$DIRNAME/.config/hypr/themes" "$HOME/.config/hypr/themes"
+        ln -sf "$HOME/.config/hypr/themes/gruvbox.conf" "$HOME/.config/hypr/theme.conf"
+        echo "Successfully installed hyprland config"
+    else
+        echo "Skipping installation of hyprland config..."
+    fi
+}
+
 function main()
 {
     echo -e "----------Noxmor's dotfiles install----------\n"
@@ -83,6 +107,8 @@ function main()
     else
         install_manual
     fi
+
+    install_complex_dotfiles
 }
 
 main
