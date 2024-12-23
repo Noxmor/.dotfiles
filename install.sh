@@ -5,12 +5,12 @@
 DIRNAME="$(realpath $(dirname "$0"))"
 
 DOTFILES=(
-	".bashrc"
-	".bash_prompt"
-	".bash_aliases"
-	".tmux.conf"
-	".config/nvim/init.lua"
-	".config/nvim/lua/noxmor"
+    ".bashrc"
+    ".bash_prompt"
+    ".bash_aliases"
+    ".tmux.conf"
+    ".config/nvim/init.lua"
+    ".config/nvim/lua/noxmor"
 )
 
 COMPLEX_DOTFILES=(
