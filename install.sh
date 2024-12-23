@@ -8,6 +8,7 @@ DOTFILES=(
     ".bashrc"
     ".bash_prompt"
     ".bash_aliases"
+    ".config/kitty"
     ".tmux.conf"
     ".config/nvim/init.lua"
     ".config/nvim/lua/noxmor"
