@@ -1,4 +1,4 @@
--- Copyright (c) 2024 Noxmor
+-- Copyright (c) 2025 Noxmor
 
 return {
     "folke/which-key.nvim",

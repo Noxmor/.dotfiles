@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2024 Noxmor
+# Copyright (c) 2025 Noxmor
 
 DIRNAME="$(realpath $(dirname "$0"))"
 

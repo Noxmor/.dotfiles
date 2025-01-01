@@ -1,3 +1,3 @@
--- Copyright (c) 2024 Noxmor
+-- Copyright (c) 2025 Noxmor
 
 require("noxmor")

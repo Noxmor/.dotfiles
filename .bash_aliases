@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Noxmor
+# Copyright (c) 2025 Noxmor
 
 # Enables color support of ls and also adds handy aliases.
 if [ -x /usr/bin/dircolors ]; then
