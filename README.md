@@ -21,6 +21,6 @@ git clone https://github.com/Noxmor/.dotfiles.git
 ```
 3. Navigate into your local version of this repository and run the following command:
 ```bash
-stow <package-name>
+stow <package-name>...
 ```
 **Note:** Every directory in this repository is a `package`.
