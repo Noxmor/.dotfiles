@@ -3,4 +3,3 @@
 require("noxmor.options")
 require("noxmor.keymaps")
 require("noxmor.lazy")
-
