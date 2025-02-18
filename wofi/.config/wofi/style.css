@@ -1,0 +1,91 @@
+/* Copyright (c) 2025 Noxmor */
+
+@define-color gruvbox-background #282828;
+@define-color gruvbox-border #98971a;
+@define-color gruvbox-red #fb4934;
+@define-color gruvbox-text #ebdbb2;
+@define-color gruvbox-text-selected #fabd2f;
+
+* {
+  font-family: 'CaskaydiaCove Nerd Font', monospace;
+  font-size: 18px;
+}
+
+window {
+  margin: 0px;
+  padding: 10px;
+  border: 2px solid @gruvbox-border;
+  border-radius: 10px;
+  background-color: @gruvbox-background;
+}
+
+#inner-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @gruvbox-background;
+}
+
+#outer-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @gruvbox-background;
+}
+
+#scroll {
+  margin: 0px;
+  padding: 10px;
+  border: none;
+  background-color: @gruvbox-background;
+}
+
+#input {
+  margin: 5px 20px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: @gruvbox-text;
+  background-color: @gruvbox-background;
+}
+
+#input:focus {
+  border-radius: 10px;
+}
+
+#input image {
+    border: none;
+    color: @gruvbox-red;
+}
+
+#input * {
+  outline: 4px solid @gruvbox-red;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: @gruvbox-text;
+}
+
+#entry {
+  background-color: @gruvbox-background;
+}
+
+#entry arrow {
+  border: none;
+  color: @gruvbox-border;
+}
+
+#entry:selected {
+  border: 1px solid @gruvbox-border;
+  border-radius: 10px;
+}
+
+#entry:selected #text {
+  color: @gruvbox-text-selected;
+}
+
+#entry:drop(active) {
+  background-color: @gruvbox-border;
+}
