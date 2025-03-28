@@ -23,4 +23,5 @@ git clone https://github.com/Noxmor/.dotfiles.git
 ```bash
 stow <package-name>...
 ```
-**Note:** Every directory in this repository is a `package`.
+> [!NOTE]
+Every directory in this repository is a `package`.
