@@ -2,6 +2,8 @@
 
 set -g fish_greeting ""
 
+set -Ux EDITOR "/usr/bin/nvim"
+
 if status is-interactive
     theme_gruvbox dark hard
 end
