@@ -2,7 +2,7 @@
   "layer": "top",
     "modules-left": ["hyprland/workspaces","custom/arch", "hyprland/window"],
     "modules-center": ["custom/spotify"],
-    "modules-right": ["battery", "custom/power", "tray", "memory", "network", "pulseaudio", "clock"],
+    "modules-right": ["battery", "custom/power", "tray", "memory", "custom/bluetooth", "network", "pulseaudio", "clock"],
     "custom/arch": {
       "format": "  ",
       "tooltip": false,
@@ -88,6 +88,13 @@
     "default": ["", "", "󰕾", ""],
       },
       "scroll-step": 1,
+    },
+    "custom/bluetooth": {
+        "exec": "~/.config/waybar/scripts/bluetooth-status.sh",
+        "interval": 10,
+        "return-type": "json",
+        "on-click": "blueman-manager",
+        "tooltip": true
     },
     "network": {
         "tooltip": true,

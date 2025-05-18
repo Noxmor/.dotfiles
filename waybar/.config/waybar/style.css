@@ -62,6 +62,23 @@ window#waybar {
   margin-right: 10px;
 }
 
+#custom-bluetooth {
+  color: #282828;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+#custom-bluetooth.on {
+    background-color: #458588;
+}
+
+#custom-bluetooth.off {
+    background-color: #a89984;
+}
+
 #network {
   background-color: #458588;
   color: #282828;
