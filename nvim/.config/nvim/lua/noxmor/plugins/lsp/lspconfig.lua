@@ -9,8 +9,6 @@ return {
         { "folke/neodev.nvim", opts = {} }
     },
     config = function()
-        local lspconfig = require("lspconfig")
-        local mason_lspconfig = require("mason-lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         local keymap = vim.keymap
@@ -63,27 +61,21 @@ return {
 
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        mason_lspconfig.setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    capabilities = capabilities
-                })
-            end,
-            ["lua_ls"] = function()
-                lspconfig["lua_ls"].setup({
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { "vim" }
-                            },
-                            completion = {
-                                callSnippet = "Replace"
-                            }
-                        }
+        vim.lsp.config("*", {
+            capabilities = capabilities
+        })
+
+        nvim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim" }
+                    },
+                    completion = {
+                        callSnippet = "Replace"
                     }
-                })
-            end
+                }
+            }
         })
     end
 }
