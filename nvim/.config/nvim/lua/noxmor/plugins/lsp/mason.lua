@@ -15,7 +15,8 @@ return {
             ensure_installed = {
                 "clangd",
                 "lua_ls",
-                "texlab"
+                "texlab",
+                "rust_analyzer"
             }
         })
     end
