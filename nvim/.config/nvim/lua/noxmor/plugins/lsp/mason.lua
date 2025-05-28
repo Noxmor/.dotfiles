@@ -1,9 +1,9 @@
 -- Copyright (c) 2025 Noxmor
 
 return {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     dependencies = {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
     },
     config = function()
         local mason = require("mason")
