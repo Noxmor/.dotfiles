@@ -7,31 +7,29 @@ ICON=$(realpath dotnotify.svg)
 
 # Make sure it's a git repo
 if [ ! -d "$REPO/.git" ]; then
-    exit 0
+    exit 1
 fi
 
-cd "$REPO" || exit 0
+cd "$REPO" || exit 1
 
-# Get the upstream branch for the current branch
-upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null) || exit 0
+# Retrieve the current branch name
+branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 
-remote_branch="${upstream#*/}"
+# Fetch updates for the current branch
+git fetch origin "$branch" --quiet || exit 1
 
-# Query the remote hash (read-only)
-remote_hash=$(git ls-remote origin "$remote_branch" 2>/dev/null | awk '{print $1}')
-local_hash=$(git rev-parse HEAD 2>/dev/null)
-
-# If offline or remote not reachable, exit silently
-[ -z "$remote_hash" ] && exit 0
+# Determine how many commits are behind
+count=$(git rev-list --count "$branch..origin/$branch" 2>/dev/null)
 
 # If up to date, exit silently
-[ "$local_hash" = "$remote_hash" ] && exit 0
-
-# Determine how many commits are behind (no fetch needed)
-count=$(git rev-list --count "${local_hash}..${remote_hash}" 2>/dev/null)
+[ "$count" -eq 0 ] && exit 0
 
 # Fallback if rev-list fails for some reason
 [ -z "$count" ] && count="some"
 
 # Send notification
-notify-send -i "$ICON" "Dotfiles update available" "There are ${count} new commit(s) to pull from origin/${remote_branch}."
+if [ "$count" -eq 1 ]; then
+    notify-send -i "$ICON" "Dotfiles update available" "There is ${count} new commit to pull from origin/${branch}."
+else
+    notify-send -i "$ICON" "Dotfiles update available" "There are ${count} new commits to pull from origin/${branch}."
+fi
