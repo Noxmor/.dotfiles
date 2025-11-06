@@ -14,6 +14,7 @@ PKGS=(
     ffmpeg
     fish
     fisher
+    gdb
     gimp
     git
     glslang
