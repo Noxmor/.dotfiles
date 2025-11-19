@@ -77,5 +77,7 @@ return {
                 }
             }
         })
+
+        vim.opt.cinoptions:append("g0")
     end
 }
