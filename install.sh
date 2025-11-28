@@ -67,6 +67,7 @@ PKGS=(
     wine-mono
     winetricks
     wireplumber
+    wljoywake
     wlogout
     yazi
     zathura
