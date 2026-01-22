@@ -26,6 +26,8 @@ PKGS=(
     jdk21-openjdk
     less
     lxappearance
+    man-db
+    man-pages
     minecraft-launcher
     noto-fonts-cjk
     nvim
