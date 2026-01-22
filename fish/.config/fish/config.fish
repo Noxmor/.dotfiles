@@ -5,6 +5,7 @@ set -g fish_greeting ""
 set -Ux VISUAL "nvim"
 set -Ux EDITOR "nvim"
 set -Ux PAGER "bat"
+set -Ux MANPAGER "nvim +Man!"
 set -Ux BROWSER "firefox"
 
 if status is-interactive
