@@ -14,6 +14,7 @@ PKGS=(
     ffmpeg
     fish
     fisher
+    fzf
     gdb
     gimp
     git
