@@ -30,6 +30,7 @@ PKGS=(
     man-db
     man-pages
     minecraft-launcher
+    mpd
     noto-fonts-cjk
     nvim
     obs-studio
@@ -44,6 +45,7 @@ PKGS=(
     plasma-framework5
     python-pip
     python-pipx
+    rmpc
     spotify
     spotify-adblock
     steam
