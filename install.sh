@@ -75,6 +75,7 @@ PKGS=(
     wljoywake
     wlogout
     yazi
+    yt-dlp
     zathura
     zathura-pdf-mupdf
 )
