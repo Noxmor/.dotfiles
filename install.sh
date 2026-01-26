@@ -30,6 +30,7 @@ PKGS=(
     man-db
     man-pages
     minecraft-launcher
+    mpc
     mpd
     noto-fonts-cjk
     nvim
