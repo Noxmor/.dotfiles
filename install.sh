@@ -11,6 +11,7 @@ PKGS=(
     blueman
     btop
     discord
+    fastfetch
     ffmpeg
     fish
     fisher
