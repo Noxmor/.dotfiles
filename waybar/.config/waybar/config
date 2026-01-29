@@ -151,5 +151,25 @@
         "custom/power": {
             "format": "⏻",
             "on-click": "wlogout"
+        },
+
+        "mpd": {
+            "server": "127.0.0.1",
+            "port": 6600,
+            "interval": 2,
+            "format": "{stateIcon}  {artist} - {title} <span color='#7c6f64'>({elapsedTime:%M:%S}/{totalTime:%M:%S})</span>",
+            "format-disconnected": "󰝛  Disconnected",
+            "format-stopped": "󰝛  Stopped",
+            "state-icons": {
+                "paused": "",
+                "playing": ""
+            },
+
+            "on-click": "mpc toggle",
+            "on-click-right": "mpc next",
+            "on-scroll-up": "mpc volume +5",
+            "on-scroll-down": "mpc volume -5",
+            "tooltip-format": "MPD (connected)",
+            "tooltip-format-disconnected": "MPD (disconnected)"
         }
 }

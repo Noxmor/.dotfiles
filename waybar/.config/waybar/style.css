@@ -148,3 +148,13 @@ window#waybar {
     padding-left: 10px;
     padding-right: 14px;
 }
+
+#mpd {
+  background-color: #d5c4a1;
+  color: #282828;
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
