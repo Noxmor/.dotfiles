@@ -3,7 +3,7 @@
 {
     "layer": "top",
         "modules-left": ["hyprland/workspaces","custom/arch", "hyprland/window"],
-        "modules-center": ["custom/spotify"],
+        "modules-center": ["custom/spotify", "mpd"],
         "modules-right": ["battery", "custom/power", "tray", "memory", "custom/bluetooth", "network", "pulseaudio", "clock"],
 
         "custom/arch": {
