@@ -26,6 +26,7 @@ PKGS=(
     hyprpaper
     hyprshot
     jdk21-openjdk
+    lazygit
     less
     lxappearance
     man-db
