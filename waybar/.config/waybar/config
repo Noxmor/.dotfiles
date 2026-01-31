@@ -186,7 +186,7 @@
             "on-click-right": "mpc next",
             "on-scroll-up": "mpc volume +5",
             "on-scroll-down": "mpc volume -5",
-            "tooltip-format": "{artist} - {title}\n------------------------\nAlbum: {album}\nArtist: {albumArtist}\nDate: {date}\n------------------------\nFlags: {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}\nVolume: {volume}%\nQueue: {songPosition}/{queueLength} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+            "tooltip-format": "{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})\n------------------------\nAlbum: {album}\nArtist: {albumArtist}\nDate: {date}\n------------------------\nFlags: {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}\nVolume: {volume}%\nQueue: {songPosition}/{queueLength}",
             "tooltip-format-disconnected": "MPD (disconnected)"
         }
 }
