@@ -2,11 +2,11 @@
 
 set -g fish_greeting ""
 
-set -Ux VISUAL "nvim"
-set -Ux EDITOR "nvim"
-set -Ux PAGER "bat"
-set -Ux MANPAGER "nvim +Man!"
-set -Ux BROWSER "firefox"
+set -gx VISUAL "nvim"
+set -gx EDITOR "nvim"
+set -gx PAGER "bat"
+set -gx MANPAGER "nvim +Man!"
+set -gx BROWSER "firefox"
 
 if status is-interactive
     theme_gruvbox dark hard
