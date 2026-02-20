@@ -31,3 +31,19 @@ function fish_prompt
         echo -n (set_color cyan)""(set_color brwhite -b cyan)" $username "(set_color cyan -b blue)""(set_color brwhite -b blue)" $current_dir "(set_color blue -b normal)""(set_color bryellow -b normal)" \$ "(set_color normal)
     end
 end
+
+# devkitPro
+if test -d /opt/devkitpro
+    set -gx DEVKITPRO /opt/devkitpro
+    fish_add_path $DEVKITPRO/tools/bin
+
+    if test -d $DEVKITPRO/devkitARM
+        set -gx DEVKITARM $DEVKITPRO/devkitARM
+        fish_add_path $DEVKITARM/bin
+    end
+
+    if test -d $DEVKITPRO/devkitPPC
+        set -gx DEVKITPPC $DEVKITPRO/devkitPPC
+        fish_add_path $DEVKITPPC/bin
+    end
+end
