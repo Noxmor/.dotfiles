@@ -46,6 +46,7 @@ PKGS=(
     pipewire-jack
     pipewire-pulse
     plasma-framework5
+    playerctl
     python-pip
     python-pipx
     rmpc
