@@ -29,6 +29,7 @@ PKGS=(
     lazygit
     less
     lxappearance
+    mako
     man-db
     man-pages
     minecraft-launcher
