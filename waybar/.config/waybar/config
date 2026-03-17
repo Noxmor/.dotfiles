@@ -157,6 +157,7 @@
             "server": "127.0.0.1",
             "port": 6600,
             "interval": 2,
+            "max-length": 130,
             "format": "{stateIcon}  {artist} - {title} <span color='#7c6f64'>({elapsedTime:%M:%S}/{totalTime:%M:%S})</span>",
             "format-disconnected": "󰝛  Disconnected",
             "format-stopped": "󰝛  Stopped",
