@@ -65,6 +65,7 @@ PKGS=(
     thunderbird
     tmux
     torbrowser-launcher
+    tree-sitter-cli
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd
     ttf-hack
