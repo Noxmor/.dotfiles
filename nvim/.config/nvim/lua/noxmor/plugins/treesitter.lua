@@ -2,40 +2,44 @@
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
+        "nvim-lua/plenary.nvim",
         "windwp/nvim-ts-autotag"
     },
-    config = function()
-        local treesitter = require("nvim-treesitter.configs")
 
-        treesitter.setup({
-            highlight = { enable = true },
-            indent = { enable = true },
-            autotag = { enable = true },
+    init = function()
+        local treesitter = require("nvim-treesitter")
+        local config = require("nvim-treesitter.config")
 
-            ensure_installed = {
-                "json",
-                "yaml",
-                "markdown",
-                "bash",
-                "lua",
-                "vim",
-                "vimdoc",
-                "gitignore",
-                "c"
-            },
+        local ensure_installed = {
+            "json",
+            "yaml",
+            "markdown",
+            "bash",
+            "lua",
+            "vim",
+            "vimdoc",
+            "gitignore",
+            "c"
+        }
 
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>"
-                }
-            }
+        local already_installed = config.get_installed()
+
+        local not_installed = vim.iter(ensure_installed)
+        :filter(function(parser)
+            return not vim.tbl_contains(already_installed, parser)
+        end)
+        :totable()
+
+        treesitter.install(not_installed)
+
+        vim.api.nvim_create_autocmd('FileType', {
+            callback = function()
+                pcall(vim.treesitter.start)
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
         })
     end
 }
