@@ -135,7 +135,7 @@ local shft_mod = main_mod .. " + SHIFT"
 
 hl.bind(main_mod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(main_mod .. " + C", hl.dsp.window.close())
-hl.bind(main_mod .. " + M", hl.dsp.exec_cmd("loginctl terminate-session $XDG_SESSION_ID"))
+hl.bind(main_mod .. " + M", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
