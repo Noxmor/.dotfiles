@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Noxmor
+
+[binds]
+n = next
+<Shift+N> = prev
