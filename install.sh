@@ -25,6 +25,7 @@ PKGS=(
     hyprlock
     hyprpaper
     hyprshot
+    imv
     jdk21-openjdk
     lazygit
     less
