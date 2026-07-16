@@ -1,0 +1,8 @@
+# Copyright (c) 2026 Noxmor
+
+set selection-clipboard clipboard
+set recolor-keephue true
+
+map i recolor
+map r rotate
+map R reload
