@@ -226,26 +226,73 @@ for _, item in ipairs(workspaces_to_monitors) do
     hl.workspace_rule({ workspace = item.workspace, monitor = item.monitor })
 end
 
--- Default workspace
-hl.window_rule({ match = { class = ".*" }, workspace = "6" })
-
--- Open modal and floating windows on active workspace
-hl.window_rule({ match = { modal = true, float = true }, workspace = "active" })
-
 -- Default workspace for certain applications
-hl.window_rule({ match = { class = terminal },           workspace = 1 })
-hl.window_rule({ match = { class = browser },            workspace = 2 })
-hl.window_rule({ match = { class = "Tor Browser" },      workspace = 2 })
-hl.window_rule({ match = { class = "thunderbird" },      workspace = 2 })
-hl.window_rule({ match = { class = "discord" },          workspace = 3 })
-hl.window_rule({ match = { class = "TeamSpeak 3" },      workspace = 3 })
-hl.window_rule({ match = { class = "teamspeak-client" }, workspace = 3 })
-hl.window_rule({ match = { class = "Spotify" },          workspace = 4 })
-hl.window_rule({ match = { class = "steam" },            workspace = 5 })
-hl.window_rule({ match = { class = "heroic" },           workspace = 5 })
+local window_rules = {
+    [terminal] = 1,
+    [browser] = 2,
+    ["Tor Browser"] = 2,
+    ["thunderbird"] = 2,
+    ["discord"] = 3,
+    ["TeamSpeak 3"] = 3,
+    ["teamspeak-client"] = 3,
+    ["Spotify"] = 4,
+    ["steam"] = 5,
+    ["heroic"] = 5
+}
 
--- Open hyprland-share-picker on active workspace
-hl.window_rule({ match = { class = "hyprland-share-picker" }, workspace = "active" })
+for class, workspace in pairs(window_rules) do
+    hl.window_rule({ match = { class = class }, workspace = workspace })
+end
+
+-- Default window workspace allocator
+local window_workspace_allocator_start = 0
+local window_workspace_allocator_end = 10
+
+for _, workspace in pairs(window_rules) do
+    if workspace >= window_workspace_allocator_start then
+        window_workspace_allocator_start = workspace
+    end
+end
+
+window_workspace_allocator_start = window_workspace_allocator_start + 1
+
+hl.on("window.open", function(w)
+    if w.floating or w.modal then
+        return
+    end
+
+    for class, _ in pairs(window_rules) do
+        if class == w.class then
+            return
+        end
+    end
+
+    for _, window in ipairs(hl.get_windows()) do
+        if window ~= w and window.class == w.class then
+            hl.dispatch(hl.dsp.window.move({ workspace = window.workspace, follow = true, window = w }))
+            return
+        end
+    end
+
+    local occupied = {}
+    for _, window in ipairs(hl.get_windows()) do
+        local ws = tonumber(window.workspace.name)
+            if ws then
+                occupied[ws] = true
+            end
+    end
+
+    local ws = window_workspace_allocator_start
+    while occupied[ws] do
+        ws = ws + 1
+    end
+
+    if ws <= window_workspace_allocator_end then
+        hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = true, window = w }))
+    else
+        hl.notification.create({ text = "No dynamic workspace available!", timeout = 5000, icon = "warning" })
+    end
+end)
 
 -- Discord window rules
 hl.window_rule({ match = { class = "discord" }, opacity = 0.9 })
