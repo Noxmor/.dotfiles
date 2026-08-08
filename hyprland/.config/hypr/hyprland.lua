@@ -204,6 +204,10 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 -- Toggle MPD playback
 hl.bind(main_mod .. " + Space", hl.dsp.exec_cmd("mpc toggle"), { locked = true })
 
+-- Temporarily prevent idle suspend until activity is detected again.
+hl.bind(main_mod .. " + I", hl.dsp.exec_cmd("~/.config/hypr/idle-state.sh set"))
+hl.bind(shft_mod .. " + I", hl.dsp.exec_cmd("~/.config/hypr/idle-state.sh toggle"))
+
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
