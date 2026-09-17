@@ -18,6 +18,27 @@ return {
             callback = function(ev)
                 local opts = { buffer = ev.buf, silent = true }
 
+                -- Format the buffer before saving if an attached LSP supports formatting.
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    buffer = ev.buf, callback = function()
+                        local clients = vim.lsp.get_clients({
+                            bufnr = ev.buf,
+                            method = "textDocument/formatting",
+                        })
+
+                        if #clients == 0 then
+                            return
+                        end
+
+                        pcall(vim.lsp.buf.format, {
+                            bufnr = ev.buf,
+                            async = false,
+                            timeout_ms = 3000,
+                        })
+
+                    end
+                })
+
                 opts.desc = "Show LSP references."
                 keymap.set('n', "gR", "<cmd>Telescope lsp_references<CR>", opts)
 
