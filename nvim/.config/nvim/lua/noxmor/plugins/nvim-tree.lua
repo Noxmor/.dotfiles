@@ -28,7 +28,8 @@ return {
         local keymap = vim.keymap
 
         keymap.set('n', "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle nvim-tree." })
-        keymap.set('n', "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle nvim-tree on the current file." })
+        keymap.set('n', "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>",
+            { desc = "Toggle nvim-tree on the current file." })
         keymap.set('n', "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse nvim-tree." })
         keymap.set('n', "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh nvim-tree." })
     end

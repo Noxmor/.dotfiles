@@ -28,10 +28,10 @@ return {
         local already_installed = config.get_installed()
 
         local not_installed = vim.iter(ensure_installed)
-        :filter(function(parser)
-            return not vim.tbl_contains(already_installed, parser)
-        end)
-        :totable()
+            :filter(function(parser)
+                return not vim.tbl_contains(already_installed, parser)
+            end)
+            :totable()
 
         treesitter.install(not_installed)
 

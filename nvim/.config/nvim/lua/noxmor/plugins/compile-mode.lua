@@ -11,7 +11,7 @@ return {
             input_word_completion = true,
         }
 
-        vim.keymap.set("n", "<leader>cc", ":below Compile<CR>", { desc = "Compile"} )
-        vim.keymap.set("n", "<leader>cr", ":below Recompile<CR>", { desc = "Recompile"} )
+        vim.keymap.set("n", "<leader>cc", ":below Compile<CR>", { desc = "Compile" })
+        vim.keymap.set("n", "<leader>cr", ":below Recompile<CR>", { desc = "Recompile" })
     end
 }

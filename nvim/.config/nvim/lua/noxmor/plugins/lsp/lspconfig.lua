@@ -6,7 +6,7 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         { "antosha417/nvim-lsp-file-operations", config = true },
-        { "folke/neodev.nvim", opts = {} }
+        { "folke/neodev.nvim",                   opts = {} }
     },
     config = function()
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -20,7 +20,8 @@ return {
 
                 -- Format the buffer before saving if an attached LSP supports formatting.
                 vim.api.nvim_create_autocmd("BufWritePre", {
-                    buffer = ev.buf, callback = function()
+                    buffer = ev.buf,
+                    callback = function()
                         local clients = vim.lsp.get_clients({
                             bufnr = ev.buf,
                             method = "textDocument/formatting",
@@ -35,7 +36,6 @@ return {
                             async = false,
                             timeout_ms = 3000,
                         })
-
                     end
                 })
 
