@@ -16,8 +16,15 @@ return {
                 "clangd",
                 "lua_ls",
                 "texlab",
-                "rust_analyzer"
-            }
+                "rust_analyzer",
+                "pyright",
+                "ruff",
+            },
+            automatic_enable = {
+                exclude = {
+                    "ruff",
+                },
+            },
         })
     end
 }
