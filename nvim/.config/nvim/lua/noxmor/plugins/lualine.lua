@@ -16,31 +16,22 @@ return {
         local function check_mason_updates()
             mason_registry.refresh(function()
                 local packages = mason_registry.get_installed_packages()
-                local remaining = #packages
                 local updates = 0
 
-                if remaining == 0 then
-                    mason_updates = 0
-                    lualine.refresh()
-                    return
-                end
-
                 for _, package in ipairs(packages) do
-                    package:get_latest_version(function(success, result)
-                        if success and result then
-                            updates = updates + 1
-                        end
+                    local installed = package:get_installed_version()
+                    local latest = package:get_latest_version()
 
-                        remaining = remaining - 1
-
-                        if remaining == 0 then
-                            mason_updates = updates
-                            vim.schedule(function()
-                                lualine.refresh()
-                            end)
-                        end
-                    end)
+                    if installed and latest and installed ~= latest then
+                        updates = updates + 1
+                    end
                 end
+
+                mason_updates = updates
+
+                vim.schedule(function()
+                    lualine.refresh()
+                end)
             end)
         end
 
