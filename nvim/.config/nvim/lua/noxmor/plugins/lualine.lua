@@ -13,25 +13,27 @@ return {
 
         local mason_updates = 0
 
+        local function update_mason_status()
+            local packages = mason_registry.get_installed_packages()
+            local updates = 0
+
+            for _, package in ipairs(packages) do
+                local installed = package:get_installed_version()
+                local latest = package:get_latest_version()
+
+                if installed and latest and installed ~= latest then
+                    updates = updates + 1
+                end
+            end
+
+            mason_updates = updates
+
+            lualine.refresh()
+        end
+
         local function check_mason_updates()
             mason_registry.refresh(function()
-                local packages = mason_registry.get_installed_packages()
-                local updates = 0
-
-                for _, package in ipairs(packages) do
-                    local installed = package:get_installed_version()
-                    local latest = package:get_latest_version()
-
-                    if installed and latest and installed ~= latest then
-                        updates = updates + 1
-                    end
-                end
-
-                mason_updates = updates
-
-                vim.schedule(function()
-                    lualine.refresh()
-                end)
+                vim.schedule(update_mason_status)
             end)
         end
 
@@ -46,6 +48,18 @@ return {
         vim.api.nvim_create_autocmd("VimEnter", {
             callback = check_mason_updates,
         })
+
+        mason_registry:on("package:install:success", function()
+            vim.schedule(update_mason_status)
+        end)
+
+        mason_registry:on("package:uninstall:success", function()
+            vim.schedule(update_mason_status)
+        end)
+
+        mason_registry:on("update:success", function()
+            vim.schedule(update_mason_status)
+        end)
 
         local color = "#FF9E64";
 
