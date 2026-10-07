@@ -52,6 +52,7 @@ PKGS=(
     python-pip
     python-pipx
     rmpc
+    rust-src
     spotify
     spotify-adblock
     steam
