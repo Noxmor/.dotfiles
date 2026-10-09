@@ -16,6 +16,7 @@ return {
                 "clangd",
                 "lua_ls",
                 "texlab",
+                "ltex_plus",
                 "rust_analyzer",
                 "pyright",
                 "ruff",
