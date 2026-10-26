@@ -61,6 +61,7 @@ PKGS=(
     telegram-desktop
     texlive-basic
     texlive-bin
+    texlive-binextra
     texlive-latex
     texlive-latexextra
     texlive-latexrecommended
