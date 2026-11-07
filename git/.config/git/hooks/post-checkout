@@ -1,0 +1,107 @@
+#!/usr/bin/env python
+
+# Copyright (c) 2026 Noxmor
+
+"""
+Automatically configure Git identity based on the repository's remote host.
+
+Inspired by: https://dufran.org/posts/auto-git-identity-by-ssh-host/
+
+Personal identities are loaded from ~/.config/git/identities.ini.
+"""
+
+import configparser
+import subprocess
+import sys
+from pathlib import Path
+from urllib.parse import urlsplit
+import re
+
+
+CONFIG_FILE = Path.home() / ".config" / "git" / "identities.ini"
+
+
+def get_remote_host(remote_url):
+    # SCP-style SSH URLs: git@github.com:user/repository.git
+    scp_match = re.match(r"^(?:[^@/]+@)?([^/:]+):", remote_url)
+
+    if scp_match and "://" not in remote_url:
+        return scp_match.group(1).lower()
+
+    # HTTPS and SSH URLs
+    parsed = urlsplit(remote_url)
+
+    if parsed.hostname:
+        return parsed.hostname.lower()
+
+    return None
+
+
+def get_remote_url():
+    result = subprocess.run(
+        ["git", "config", "--get", "remote.origin.url"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    if result.returncode != 0:
+        return None
+
+    return result.stdout.strip()
+
+
+def configure_identity(identity):
+    settings = {
+        "user.name": identity["name"],
+        "user.email": identity["email"],
+    }
+
+    signing_key = identity.get("signingKey")
+
+    if signing_key:
+        settings["user.signingKey"] = signing_key
+        settings["commit.gpgSign"] = "true"
+    else:
+        settings["commit.gpgSign"] = "false"
+
+    for key, value in settings.items():
+        subprocess.run(
+            ["git", "config", "--local", key, value],
+            check=True,
+        )
+
+
+def main():
+    remote_url = get_remote_url()
+
+    if not remote_url:
+        return
+
+    host = get_remote_host(remote_url)
+
+    if not host or not CONFIG_FILE.is_file():
+        return
+
+    config = configparser.ConfigParser(interpolation=None)
+    config.read(CONFIG_FILE, encoding="utf-8")
+
+    if not config.has_section(host):
+        return
+
+    identity = config[host]
+
+    if not identity.get("name") or not identity.get("email"):
+        return
+
+    configure_identity(identity)
+
+    print(f"Git identity configured for {host}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (OSError, subprocess.SubprocessError) as error:
+        print(f"Git identity hook failed: {error}", file=sys.stderr)
+        sys.exit(1)
