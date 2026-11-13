@@ -12,7 +12,7 @@ local colorscheme = require("themes.gruvbox")
 
 local terminal = "kitty"
 local file_manager = terminal .. " -e yazi"
-local menu = "wofi --show drun"
+local menu = "pgrep -x wofi >/dev/null || wofi --show drun"
 local browser = "firefox"
 
 ------------------
