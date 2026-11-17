@@ -41,6 +41,8 @@ PKGS=(
     obs-studio
     openssh
     p7zip
+    pass
+    passwofi
     pavucontrol
     pipewire
     pipewire-alsa
