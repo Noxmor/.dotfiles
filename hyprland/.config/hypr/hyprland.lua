@@ -13,6 +13,7 @@ local colorscheme = require("themes.gruvbox")
 local terminal = "kitty"
 local file_manager = terminal .. " -e yazi"
 local menu = "pgrep -x wofi >/dev/null || wofi --show drun"
+local pwd_manager = "pgrep -x passwofi >/dev/null || passwofi"
 local browser = "firefox"
 
 ------------------
@@ -138,7 +139,8 @@ hl.bind(main_mod .. " + C", hl.dsp.window.close())
 hl.bind(main_mod .. " + M", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
+hl.bind(main_mod .. " + P", hl.dsp.exec_cmd(pwd_manager))
+hl.bind(shft_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + T", hl.dsp.layout("togglesplit")) -- dwindle
 hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(browser))
 hl.bind(shft_mod .. " + F", hl.dsp.exec_cmd("torbrowser-launcher"))
